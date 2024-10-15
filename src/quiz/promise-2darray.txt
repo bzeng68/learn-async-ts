@@ -1,1 +1,25 @@
 Explain the code execution based on the order of the messages logged in src/quiz/promise-2darray.txt.
+
+Order of messages logged:
+1.     Sum called ... 
+2.     returning from sum
+3.     Sum called ... 
+4.     returning from sum
+5.     sumPromise2 error: Cannot sum an empty array
+6.     Adding 1 to sum
+7.     Adding 2 to sum
+8.     Adding 3 to sum
+9.     Adding 4 to sum
+10.    Adding 5 to sum
+11.    Adding 6 to sum
+12.    Adding 7 to sum
+13.    Adding 8 to sum
+14.    Adding 9 to sum
+15.    sumPromise1 sum: 45
+
+The sum2DArray function is a synchronous function that contain a setTimeout that puts the summing 2D array logic
+on the asynchronous event queue. Lines 1 and 2 get logged synchronously when sumPromise1 is created and then
+lines 3 and 4 are logged subsequently when sumPromise2 is created. Then, sumPromise2 gets synchronously
+rejected in line 5 when the sum2DArray function checks if the length of the array is 0. Finally,
+lines 6 to 15 are produced when sumPromise2 is resolved and the setTimeout logic is taken off the 
+asynchronous event queue and run by the main thread.
